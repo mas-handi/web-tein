@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEIN Suspensi Indonesia — Kualitas Jepang Teruji</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        ink:        '#0D0F0D',
+                        ink2:       '#16191A',
+                        tgreen:     '#00A651',
+                        'tgreen-d': '#00833F',
+                        'tgreen-l': '#E9F8EF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { overflow-x: hidden; font-family: "Plus Jakarta Sans", sans-serif; }
+
+        /* ── HEADER ── */
+        #header-wrapper {
+            background-color: #0D0F0D;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        /* State putih saat di-scroll */
+        #header-wrapper.scrolled {
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Teks header */
+        .header-text, .header-subtext, .nav-link, .menu-btn {
+            transition: color 0.3s ease;
+        }
+        .header-text { color: #fff; }
+        #header-wrapper.scrolled .header-text { color: #0D0F0D; }
+        .header-subtext { color: rgba(255,255,255,0.7); }
+        #header-wrapper.scrolled .header-subtext { color: #4B5563; }
+        .nav-link { color: #fff; font-weight: 700; font-size: 0.9rem; position: relative; }
+        #header-wrapper.scrolled .nav-link { color: #16191A; }
+        .nav-link:hover { color: #00A651 !important; }
+        .menu-btn { color: #fff; }
+        #header-wrapper.scrolled .menu-btn { color: #0D0F0D; }
+
+        /* ── HERO SLIDER ── */
+        .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease-in-out; }
+        .slide.active { opacity: 1; z-index: 10; }
+        .slide-content { transform: translateY(20px); opacity: 0; transition: all 0.8s ease-out 0.3s; }
+        .slide.active .slide-content { transform: translateY(0); opacity: 1; }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22,1,0.36,1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ── BACK TO TOP ── */
+        #back-to-top {
+            position: fixed; right: 20px; bottom: 20px; width: 46px; height: 46px;
+            border-radius: 50%; background: #00A651; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: all 0.3s ease; z-index: 60;
+            box-shadow: 0 4px 12px rgba(0,166,81,0.4);
+        }
+        #back-to-top.show { opacity: 1; pointer-events: auto; }
+        #back-to-top:hover { background: #00833F; transform: translateY(-3px); }
+
+        /* ── DROPDOWN ── */
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-menu {
+            display: none; position: absolute; top: calc(100% + 12px); left: 50%;
+            transform: translateX(-50%); background: #fff;
+            border: 1px solid #e5e7eb; border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1); min-width: 200px; z-index: 100; padding: 8px 0;
+        }
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-menu a {
+            display: block; padding: 10px 16px; font-size: 12px;
+            font-weight: 700; color: #16191A; text-transform: uppercase;
+            letter-spacing: 0.05em; white-space: nowrap;
+        }
+        .nav-dropdown-menu a:hover { color: #00A651; background: #E9F8EF; }
+    </style>
+</head>
+<body class="bg-white text-gray-900 pt-[96px] md:pt-[112px]">
+
+    <!-- ── HEADER ── -->
+    <div id="header-wrapper" class="fixed top-0 left-0 z-50 w-full">
+
+        <div id="top-bar" class="bg-[#00A651] text-white text-[11px] md:text-xs font-bold py-2">
+            <div class="container mx-auto px-6 flex justify-end gap-6 uppercase tracking-wide">
+                <a href="mailto:info@tein.id" class="hover:text-white/80 transition-colors">Hubungi Kerjasama</a>
+                <a href="#garansi" class="hover:text-white/80 transition-colors">Garansi</a>
+            </div>
+        </div>
+
+        <header class="py-3 md:py-4 relative z-10">
+            <div class="container mx-auto px-6 flex items-center justify-between">
+
+                <a href="#" class="flex items-center gap-3 group shrink-0">
+                    <svg class="h-10 md:h-12 text-[#00A651] group-hover:scale-105 transition-transform" viewBox="0 0 60 60" fill="none">
+                        <rect x="6" y="8" width="48" height="10" rx="2" fill="currentColor"/>
+                        <rect x="25" y="18" width="10" height="34" rx="2" fill="currentColor"/>
+                    </svg>
+                    <div>
+                        <div class="font-black text-3xl md:text-4xl tracking-widest leading-none header-text">TEIN<span class="text-xs align-top font-bold">&reg;</span></div>
+                        <div class="text-[7px] md:text-[8px] font-bold tracking-widest uppercase mt-1 header-subtext">Suspensi No.1 Jepang</div>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center gap-5 xl:gap-8 text-[11px] xl:text-xs uppercase tracking-wider">
+                    <a href="#" class="nav-link">Beranda</a>
+                    <a href="#tentang" class="nav-link">Tentang Kami</a>
+                    <div class="nav-dropdown">
+                        <a href="#produk" class="nav-link flex items-center gap-1">Produk <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></a>
+                        <div class="nav-dropdown-menu">
+                            <a href="#produk">TEIN Basic</a>
+                            <a href="#produk">TEIN EnduraPro</a>
+                            <a href="#produk">TEIN EnduraPro Plus</a>
+                            <a href="#produk">TEIN Street Advance Z4</a>
+                            <a href="#produk">TEIN Damper Gravel 4x4</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="#" class="nav-link flex items-center gap-1">Berita <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></a>
+                        <div class="nav-dropdown-menu">
+                            <a href="#">Berita Terbaru</a>
+                            <a href="#">Event & Pameran</a>
+                            <a href="#">Tips Otomotif</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-link">Jawaban Teknis</a>
+                    <a href="#dealer" class="nav-link relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-yellow-400">Dealer Terdekat</a>
+                </nav>
+
+                <button id="menu-toggle" class="lg:hidden p-1 menu-btn" aria-label="Buka menu">
+                    <svg id="icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-100 px-6 pb-5 pt-2 shadow-xl absolute w-full top-full left-0">
+            <nav class="flex flex-col gap-1 text-[#0D0F0D] font-bold text-sm uppercase tracking-wider">
+                <a href="#" class="py-3 border-b border-gray-100 hover:text-[#00A651] transition-colors">Beranda</a>
+                <a href="#tentang" class="py-3 border-b border-gray-100 hover:text-[#00A651] transition-colors">Tentang Kami</a>
+                <a href="#produk" class="py-3 border-b border-gray-100 hover:text-[#00A651] transition-colors">Produk</a>
+                <a href="#" class="py-3 border-b border-gray-100 hover:text-[#00A651] transition-colors">Berita</a>
+                <a href="#" class="py-3 border-b border-gray-100 hover:text-[#00A651] transition-colors">Jawaban Teknis</a>
+                <a href="#dealer" class="py-3 text-[#00A651]">Dealer Terdekat</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ── HERO SLIDER ── -->
+    <section class="relative w-full h-[60vh] md:h-[75vh] min-h-[450px] overflow-hidden group bg-[#0D0F0D]">
+        <div id="hero-slider" class="w-full h-full relative">
+            <div class="slide active">
+                <img src="https://placehold.co/1920x1080/1a1a1a/444444?text=Mobil+Drift+Jepang" alt="Drift Car" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/60"></div>
+                <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+                    <div class="slide-content">
+                        <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-5 tracking-tight drop-shadow-md">Kualitas Jepang Teruji</h1>
+                        <p class="text-base md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto drop-shadow font-medium">Setiap produk TEIN dibuat dengan presisi dan standar kualitas tertinggi dari Jepang.</p>
+                        <a href="#produk" class="bg-[#00A651] hover:bg-[#00833F] text-white font-bold py-3.5 px-8 rounded transition-all shadow-lg hover:shadow-xl inline-block">Lihat Produk Kami</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://placehold.co/1920x1080/0A190F/222222?text=Suspensi+Coilover" alt="Suspension Coilover" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/60"></div>
+                <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+                    <div class="slide-content">
+                        <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-5 tracking-tight drop-shadow-md">Performa Maksimal</h1>
+                        <p class="text-base md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto drop-shadow font-medium">Kendali penuh di setiap tikungan dengan teknologi peredaman eksklusif TEIN.</p>
+                        <a href="#produk" class="bg-[#00A651] hover:bg-[#00833F] text-white font-bold py-3.5 px-8 rounded transition-all shadow-lg hover:shadow-xl inline-block">Cari Suspensi Anda</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button onclick="changeSlide(-1)" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-black/50 hover:bg-black/90 text-white flex items-center justify-center rounded border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300" aria-label="Slide sebelumnya">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button onclick="changeSlide(1)" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-black/50 hover:bg-black/90 text-white flex items-center justify-center rounded border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300" aria-label="Slide berikutnya">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <div class="absolute bottom-6 left-0 right-0 z-30 flex justify-center gap-2">
+            <div class="dot w-2 h-2 rounded-full bg-white cursor-pointer" onclick="goToSlide(0)"></div>
+            <div class="dot w-2 h-2 rounded-full bg-white/40 cursor-pointer" onclick="goToSlide(1)"></div>
+        </div>
+    </section>
+
+    <!-- ── FITUR TEKNOLOGI ── -->
+    <section class="py-12 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4 lg:max-w-6xl">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+                <div class="reveal text-center group cursor-pointer">
+                    <div class="w-full h-24 md:h-32 mx-auto rounded-xl mb-3 flex items-center justify-center bg-gray-50 group-hover:bg-[#E9F8EF] transition-colors p-3 border border-transparent group-hover:border-[#00A651]/20">
+                        <img src="https://placehold.co/300x200/transparent/00a651?text=HBS" alt="HBS" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">TEKNOLOGI</p>
+                    <h4 class="text-sm md:text-base text-[#0D0F0D] font-black uppercase leading-tight group-hover:text-[#00A651] transition-colors">HBS SANGAT HALUS</h4>
+                </div>
+                <div class="reveal text-center group cursor-pointer" style="transition-delay:100ms">
+                    <div class="w-full h-24 md:h-32 mx-auto rounded-xl mb-3 flex items-center justify-center bg-gray-50 group-hover:bg-[#E9F8EF] transition-colors p-3 border border-transparent group-hover:border-[#00A651]/20">
+                        <img src="https://placehold.co/300x200/transparent/00a651?text=Tube" alt="Tube" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">TABUNG GANDA</p>
+                    <h4 class="text-sm md:text-base text-[#0D0F0D] font-black uppercase leading-tight group-hover:text-[#00A651] transition-colors">PERFORMA TINGGI</h4>
+                </div>
+                <div class="reveal text-center group cursor-pointer" style="transition-delay:200ms">
+                    <div class="w-full h-24 md:h-32 mx-auto rounded-xl mb-3 flex items-center justify-center bg-gray-50 group-hover:bg-[#E9F8EF] transition-colors p-3 border border-transparent group-hover:border-[#00A651]/20">
+                        <img src="https://placehold.co/300x200/transparent/00a651?text=Body" alt="Body" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">BODI SHOCK</p>
+                    <h4 class="text-sm md:text-base text-[#0D0F0D] font-black uppercase leading-tight group-hover:text-[#00A651] transition-colors">LEBIH BESAR OEM</h4>
+                </div>
+                <div class="reveal text-center group cursor-pointer" style="transition-delay:300ms">
+                    <div class="w-full h-24 md:h-32 mx-auto rounded-xl mb-3 flex items-center justify-center bg-gray-50 group-hover:bg-[#E9F8EF] transition-colors p-3 border border-transparent group-hover:border-[#00A651]/20">
+                        <img src="https://placehold.co/300x200/transparent/00a651?text=Oil" alt="Oil" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">OLI PERFORMA</p>
+                    <h4 class="text-sm md:text-base text-[#0D0F0D] font-black uppercase leading-tight group-hover:text-[#00A651] transition-colors">PEREDAMAN EFEKTIF</h4>
+                </div>
+                <div class="reveal text-center group cursor-pointer" style="transition-delay:400ms">
+                    <div class="w-full h-24 md:h-32 mx-auto rounded-xl mb-3 flex items-center justify-center bg-gray-50 group-hover:bg-[#E9F8EF] transition-colors p-3 border border-transparent group-hover:border-[#00A651]/20">
+                        <img src="https://placehold.co/300x200/transparent/00a651?text=Inst" alt="Install" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">PEMASANGAN PnP</p>
+                    <h4 class="text-sm md:text-base text-[#0D0F0D] font-black uppercase leading-tight group-hover:text-[#00A651] transition-colors">GARANSI 1 TAHUN</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PENCARIAN ── -->
+    <section class="pb-16 pt-8 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4 reveal">
+            <div class="bg-[#27a844] rounded-xl p-6 md:p-8 flex flex-col lg:flex-row items-center gap-6 shadow-[0_10px_30px_rgba(39,168,68,0.3)] relative overflow-hidden">
+                <div class="text-white font-black text-xl lg:text-2xl leading-tight lg:w-1/4 uppercase z-10 w-full text-center lg:text-left tracking-wide">MOBIL APA YANG<br>ANDA GUNAKAN?</div>
+                <form action="pencarian.php" method="GET" class="flex-grow flex flex-col md:flex-row gap-6 w-full z-10 items-end">
+                    <div class="flex-1 w-full relative">
+                        <label class="text-white/90 text-xs font-bold uppercase mb-2 block tracking-wider">Pabrikan Mobil</label>
+                        <select id="select-merk" name="merk" class="w-full bg-transparent text-white font-bold text-lg border-b-2 border-white/40 pb-2 focus:outline-none focus:border-white appearance-none cursor-pointer">
+                            <option value="" class="text-gray-800">Pilih Pabrikan...</option>
+                            <option value="honda" class="text-gray-800">Honda</option>
+                            <option value="toyota" class="text-gray-800">Toyota</option>
+                            <option value="mitsubishi" class="text-gray-800">Mitsubishi</option>
+                            <option value="suzuki" class="text-gray-800">Suzuki</option>
+                            <option value="daihatsu" class="text-gray-800">Daihatsu</option>
+                            <option value="nissan" class="text-gray-800">Nissan</option>
+                            <option value="mazda" class="text-gray-800">Mazda</option>
+                            <option value="hyundai" class="text-gray-800">Hyundai</option>
+                        </select>
+                        <div class="absolute right-0 bottom-3 pointer-events-none text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+                    </div>
+                    <div class="flex-1 w-full relative">
+                        <label class="text-white/90 text-xs font-bold uppercase mb-2 block tracking-wider">Model Mobil</label>
+                        <select id="select-model" name="model" class="w-full bg-transparent text-white font-bold text-lg border-b-2 border-white/40 pb-2 focus:outline-none focus:border-white appearance-none cursor-pointer">
+                            <option value="" class="text-gray-800">Pilih Model...</option>
+                        </select>
+                        <div class="absolute right-0 bottom-3 pointer-events-none text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+                    </div>
+                    <div class="w-full lg:w-1/3 relative mt-4 md:mt-0">
+                        <input type="text" name="keyword" placeholder="Kata Kunci..." class="w-full py-4 pl-6 pr-14 rounded font-bold text-[#0D0F0D] focus:outline-none focus:ring-2 focus:ring-white shadow-inner bg-white">
+                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-white hover:bg-[#00833F] p-2 bg-[#00A651] rounded transition-colors" aria-label="Cari">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── TENTANG ── -->
+    <section id="tentang" class="relative w-full py-24 md:py-32 bg-[#0D0F0D] overflow-hidden group">
+        <img src="https://placehold.co/1920x800/1a1a1a/00A651?text=TEIN+Suspension+Workshop" alt="Workshop TEIN" class="absolute inset-0 w-full h-full object-cover opacity-40 transform group-hover:scale-105 transition-transform duration-1000">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0D0F0D]/90 via-[#0D0F0D]/70 to-transparent pointer-events-none"></div>
+        <div class="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-12 items-center">
+            <div class="lg:w-2/3 reveal">
+                <span class="inline-block px-3 py-1 bg-white/10 backdrop-blur text-[#00A651] text-xs font-black tracking-widest uppercase mb-4 border border-[#00A651]/30 rounded">Dibuat di Jepang</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-black italic mb-6 leading-tight text-white uppercase tracking-tight drop-shadow-lg">
+                    SUSPENSI TEIN ADALAH SUSPENSI NYAMAN<br>
+                    <span class="text-[#00A651]">JIKA ANDA INGIN BERKENDARA NYAMAN, HARUS PASANG TEIN!</span>
+                </h2>
+                <div class="text-gray-300 text-sm md:text-base leading-relaxed space-y-4 mb-8 max-w-3xl">
+                    <p>TEIN adalah merek dari Jepang, terkenal dengan kualitas dan teknologinya yang terbaik di industri otomotif. Sejak awal pendiriannya, TEIN telah mendefinisikan misinya untuk memberikan pengalaman berkendara yang sempurna dengan peredam kejut berkekuatan tinggi.</p>
+                    <p>TEIN menawarkan berbagai macam suspensi untuk memenuhi kebutuhan spesifik pengendara. Setiap suspensi TEIN dibuat dengan cermat, dioptimalkan untuk keseimbangan antara kehalusan dan traksi.</p>
+                </div>
+                <a href="#tentang" class="inline-flex items-center gap-2 bg-[#00A651] text-white font-bold px-6 py-3 rounded hover:bg-[#00833F] transition-all shadow-lg">
+                    BACA SELENGKAPNYA
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+            <div id="garansi" class="lg:w-1/3 reveal" style="transition-delay:200ms">
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-2xl relative overflow-hidden text-center">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-[#00A651] rounded-full blur-3xl opacity-30"></div>
+                    <div class="font-black text-xs text-white/70 uppercase mb-1">Daftar | Cek</div>
+                    <div class="font-black text-2xl text-white uppercase mb-6 tracking-wide">GARANSI TEIN</div>
+                    <img src="https://placehold.co/180x180/00833F/FFD700?text=Sertifikat" alt="Badge Garansi" class="w-32 h-32 mx-auto drop-shadow-xl rounded-full border-[3px] border-yellow-400 mb-6">
+                    <a href="#" class="block w-full border-2 border-white text-white font-bold py-2 rounded hover:bg-white hover:text-[#0D0F0D] transition-colors">Cek Garansi Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PRODUK ── -->
+    <section id="produk" class="py-16 bg-white">
+        <div class="container mx-auto px-4 lg:max-w-[1400px]">
+            <div class="text-center mb-6 reveal">
+                <h2 class="text-3xl font-black text-[#00A651] uppercase tracking-tight">PRODUK</h2>
+            </div>
+            <div class="reveal bg-[#f2f2f2] rounded-[24px] p-5 md:p-6 mb-10 flex flex-wrap gap-x-6 md:gap-x-10 gap-y-3 justify-center md:justify-start items-center text-[10px] md:text-[11px] font-black text-gray-800 uppercase tracking-wide">
+                <a href="#" class="hover:text-[#00A651] transition-colors border-b-2 border-[#00A651] pb-1">TEIN BASIC (53)</a>
+                <a href="#" class="hover:text-[#00A651] transition-colors pb-1">TEIN DAMPER GRAVEL 4X4 (1)</a>
+                <a href="#" class="hover:text-[#00A651] transition-colors pb-1">TEIN DAMPER SPORT (1)</a>
+                <a href="#" class="hover:text-[#00A651] transition-colors pb-1">TEIN ENDURAPRO (8)</a>
+                <a href="#" class="hover:text-[#00A651] transition-colors pb-1">TEIN ENDURAPRO PLUS (86)</a>
+                <a href="#" class="hover:text-[#00A651] transition-colors pb-1">TEIN STREET ADVANCE Z4 (6)</a>
+            </div>
+
+            <!-- Mobile -->
+            <div class="md:hidden flex flex-col gap-4">
+                <div class="reveal flex gap-4 bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#00A651] transition-all cursor-pointer">
+                    <div class="w-28 shrink-0"><img src="https://placehold.co/400x500/00A651/fff?text=Toyota+Avanza" alt="Avanza" class="w-full h-full object-cover"></div>
+                    <div class="flex flex-col justify-between py-3 pr-3 flex-1 min-w-0">
+                        <div>
+                            <div class="font-black italic text-base leading-tight text-[#0D0F0D] uppercase mb-1">EnduraPro <span class="font-extrabold not-italic text-xs">PLUS</span></div>
+                            <p class="text-[10px] text-gray-500 uppercase leading-relaxed line-clamp-2">Toyota Avanza — 16 langkah penyesuaian</p>
+                        </div>
+                        <div>
+                            <div class="font-bold text-xs text-[#0D0F0D] mb-2">Rp 4.800.000 <span class="text-[9px]">/set</span></div>
+                            <div class="flex gap-2 text-[10px]">
+                                <a href="#" class="flex-1 text-center py-1.5 bg-gray-100 hover:bg-[#00A651] hover:text-white text-gray-600 rounded font-bold transition-colors">Detail</a>
+                                <a href="#" class="flex-1 text-center py-1.5 bg-[#00A651] text-white rounded font-bold hover:bg-[#00833F] transition-colors">Konsultasi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal flex gap-4 bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#00A651] transition-all cursor-pointer">
+                    <div class="w-28 shrink-0"><img src="https://placehold.co/400x500/00A651/fff?text=Honda+Civic" alt="Civic" class="w-full h-full object-cover"></div>
+                    <div class="flex flex-col justify-between py-3 pr-3 flex-1 min-w-0">
+                        <div>
+                            <div class="font-black italic text-base leading-tight text-[#0D0F0D] uppercase mb-1">EnduraPro <span class="font-extrabold not-italic text-xs">PLUS</span></div>
+                            <p class="text-[10px] text-gray-500 uppercase leading-relaxed line-clamp-2">Honda Civic — 16 langkah penyesuaian</p>
+                        </div>
+                        <div>
+                            <div class="font-bold text-xs text-[#0D0F0D] mb-2">Rp 6.200.000 <span class="text-[9px]">/set</span></div>
+                            <div class="flex gap-2 text-[10px]">
+                                <a href="#" class="flex-1 text-center py-1.5 bg-gray-100 hover:bg-[#00A651] hover:text-white text-gray-600 rounded font-bold transition-colors">Detail</a>
+                                <a href="#" class="flex-1 text-center py-1.5 bg-[#00A651] text-white rounded font-bold hover:bg-[#00833F] transition-colors">Konsultasi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal flex gap-4 bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#00A651] transition-all cursor-pointer">
+                    <div class="w-28 shrink-0"><img src="https://placehold.co/400x500/00A651/fff?text=Toyota+Fortuner" alt="Fortuner" class="w-full h-full object-cover"></div>
+                    <div class="flex flex-col justify-between py-3 pr-3 flex-1 min-w-0">
+                        <div>
+                            <div class="font-black italic text-base leading-tight text-[#0D0F0D] uppercase mb-1">Damper <span class="font-extrabold not-italic text-xs">GRAVEL 4X4</span></div>
+                            <p class="text-[10px] text-gray-500 uppercase leading-relaxed line-clamp-2">Toyota Fortuner — Off-road performance</p>
+                        </div>
+                        <div>
+                            <div class="font-bold text-xs text-[#0D0F0D] mb-2">Rp 7.500.000 <span class="text-[9px]">/set</span></div>
+                            <div class="flex gap-2 text-[10px]">
+                                <a href="#" class="flex-1 text-center py-1.5 bg-gray-100 hover:bg-[#00A651] hover:text-white text-gray-600 rounded font-bold transition-colors">Detail</a>
+                                <a href="#" class="flex-1 text-center py-1.5 bg-[#00A651] text-white rounded font-bold hover:bg-[#00833F] transition-colors">Konsultasi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop -->
+            <div class="hidden md:block relative px-8">
+                <button class="absolute left-0 top-[35%] -translate-y-1/2 z-10 w-10 h-16 bg-white/80 shadow-md flex items-center justify-center rounded-r-lg text-gray-400 hover:text-[#00A651] hover:bg-white transition-all" aria-label="Sebelumnya">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button class="absolute right-0 top-[35%] -translate-y-1/2 z-10 w-10 h-16 bg-white/80 shadow-md flex items-center justify-center rounded-l-lg text-gray-400 hover:text-[#00A651] hover:bg-white transition-all" aria-label="Berikutnya">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
+                <div class="grid grid-cols-3 lg:grid-cols-5 gap-6">
+                    <!-- 5 produk desktop -->
+                    <div class="reveal flex flex-col group cursor-pointer">
+                        <div class="relative w-full aspect-[4/5] bg-gray-50 mb-3 overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/400x500/00A651/fff?text=Toyota+Avanza" alt="Avanza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="font-black italic text-xl leading-none mb-2 text-[#0D0F0D] uppercase">EnduraPro<br><span class="text-sm font-extrabold">PLUS</span></div>
+                        <p class="text-[10px] text-gray-600 uppercase mb-3 line-clamp-3 leading-relaxed">Peredam kejut untuk <strong>Toyota Avanza</strong> — 16 langkah penyesuaian</p>
+                        <div class="mt-auto">
+                            <div class="font-bold text-xs text-[#0D0F0D] mb-3">Rp 4.800.000 <span class="text-[9px]">/set</span></div>
+                            <div class="flex text-[10px] text-gray-500 pt-3 border-t border-gray-200">
+                                <a href="#" class="w-1/2 pr-2 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Deskripsi Produk<br>Terperinci</a>
+                                <div class="w-[1px] bg-gray-200"></div>
+                                <a href="#" class="w-1/2 pl-3 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Konsultasi<br>sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal flex flex-col group cursor-pointer" style="transition-delay:100ms">
+                        <div class="relative w-full aspect-[4/5] bg-gray-50 mb-3 overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/400x500/00A651/fff?text=Honda+Civic" alt="Civic" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="font-black italic text-xl leading-none mb-2 text-[#0D0F0D] uppercase">EnduraPro<br><span class="text-sm font-extrabold">PLUS</span></div>
+                        <p class="text-[10px] text-gray-600 uppercase mb-3 line-clamp-3 leading-relaxed">Peredam kejut untuk <strong>Honda Civic</strong> — 16 langkah penyesuaian</p>
+                        <div class="mt-auto">
+                            <div class="font-bold text-xs text-[#0D0F0D] mb-3">Rp 6.200.000 <span class="text-[9px]">/set</span></div>
+                            <div class="flex text-[10px] text-gray-500 pt-3 border-t border-gray-200">
+                                <a href="#" class="w-1/2 pr-2 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Deskripsi Produk<br>Terperinci</a>
+                                <div class="w-[1px] bg-gray-200"></div>
+                                <a href="#" class="w-1/2 pl-3 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Konsultasi<br>sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal flex flex-col group cursor-pointer" style="transition-delay:200ms">
+                        <div class="relative w-full aspect-[4/5] bg-gray-50 mb-3 overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/400x500/00A651/fff?text=Toyota+Fortuner" alt="Fortuner" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="font-black italic text-xl leading-none mb-2 text-[#0D0F0D] uppercase">Damper<br><span class="text-sm font-extrabold">GRAVEL 4X4</span></div>
+                        <p class="text-[10px] text-gray-600 uppercase mb-3 line-clamp-3 leading-relaxed">Peredam kejut untuk <strong>Toyota Fortuner</strong> — ideal untuk medan off-road</p>
+                        <div class="mt-auto">
+                            <div class="font-bold text-xs text-[#0D0F0D] mb-3">Rp 7.500.000 <span class="text-[9px]">/set</span></div>
+                            <div class="flex text-[10px] text-gray-500 pt-3 border-t border-gray-200">
+                                <a href="#" class="w-1/2 pr-2 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Deskripsi Produk<br>Terperinci</a>
+                                <div class="w-[1px] bg-gray-200"></div>
+                                <a href="#" class="w-1/2 pl-3 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Konsultasi<br>sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal flex-col group cursor-pointer hidden lg:flex" style="transition-delay:300ms">
+                        <div class="relative w-full aspect-[4/5] bg-gray-50 mb-3 overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/400x500/00A651/fff?text=Pajero+Sport" alt="Pajero Sport" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="font-black italic text-xl leading-none mb-2 text-[#0D0F0D] uppercase">EnduraPro<br><span class="text-sm font-extrabold">PLUS</span></div>
+                        <p class="text-[10px] text-gray-600 uppercase mb-3 line-clamp-3 leading-relaxed">Peredam kejut untuk <strong>Mitsubishi Pajero Sport</strong> — 16 langkah penyesuaian</p>
+                        <div class="mt-auto">
+                            <div class="font-bold text-xs text-[#0D0F0D] mb-3">Rp 6.800.000 <span class="text-[9px]">/set</span></div>
+                            <div class="flex text-[10px] text-gray-500 pt-3 border-t border-gray-200">
+                                <a href="#" class="w-1/2 pr-2 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Deskripsi Produk<br>Terperinci</a>
+                                <div class="w-[1px] bg-gray-200"></div>
+                                <a href="#" class="w-1/2 pl-3 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Konsultasi<br>sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal flex-col group cursor-pointer hidden lg:flex" style="transition-delay:400ms">
+                        <div class="relative w-full aspect-[4/5] bg-gray-50 mb-3 overflow-hidden rounded-lg">
+                            <img src="https://placehold.co/400x500/00A651/fff?text=Innova+Zenix" alt="Innova Zenix" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="font-black italic text-xl leading-none mb-2 text-[#0D0F0D] uppercase">EnduraPro<br><span class="text-sm font-extrabold">PLUS</span></div>
+                        <p class="text-[10px] text-gray-600 uppercase mb-3 line-clamp-3 leading-relaxed">Peredam kejut untuk <strong>Toyota Innova Zenix</strong> — 16 langkah penyesuaian</p>
+                        <div class="mt-auto">
+                            <div class="font-bold text-xs text-[#0D0F0D] mb-3">Rp 5.900.000 <span class="text-[9px]">/set</span></div>
+                            <div class="flex text-[10px] text-gray-500 pt-3 border-t border-gray-200">
+                                <a href="#" class="w-1/2 pr-2 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Deskripsi Produk<br>Terperinci</a>
+                                <div class="w-[1px] bg-gray-200"></div>
+                                <a href="#" class="w-1/2 pl-3 hover:text-[#00A651] underline underline-offset-2 decoration-gray-300 transition-colors">Konsultasi<br>sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SOROTAN ── -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-black text-[#0D0F0D] uppercase tracking-tight">Sorotan</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="#garansi" class="reveal block group rounded-2xl overflow-hidden relative shadow-lg h-72 md:h-80">
+                    <img src="https://placehold.co/400x600/1a1a1a/00A651?text=Garansi" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Garansi">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#00A651] via-[#00A651]/50 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10 w-full">
+                        <h3 class="font-black text-white text-lg uppercase mb-1">Pendaftaran Garansi</h3>
+                        <p class="text-white/80 text-xs font-medium leading-relaxed">Halaman pendaftaran garansi resmi produk TEIN Indonesia.</p>
+                    </div>
+                </a>
+                <a href="#dealer" class="reveal block group rounded-2xl overflow-hidden relative shadow-lg h-72 md:h-80" style="transition-delay:100ms">
+                    <img src="https://placehold.co/400x600/1a1a1a/00A651?text=Distribusi" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Distribusi">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#00A651] via-[#00A651]/50 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10 w-full">
+                        <h3 class="font-black text-white text-lg uppercase mb-1">Sistem Distribusi</h3>
+                        <p class="text-white/80 text-xs font-medium leading-relaxed">Jaringan dealer asli dan titik distribusi TEIN secara nasional.</p>
+                    </div>
+                </a>
+                <a href="#" class="reveal block group rounded-2xl overflow-hidden relative shadow-lg h-72 md:h-80" style="transition-delay:200ms">
+                    <img src="https://placehold.co/400x600/1a1a1a/00A651?text=Teknis" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Teknis">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#00A651] via-[#00A651]/50 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10 w-full">
+                        <h3 class="font-black text-white text-lg uppercase mb-1">Bantuan Teknis</h3>
+                        <p class="text-white/80 text-xs font-medium leading-relaxed">Dasar-dasar instruksi teknis peredam kejut dari ahli TEIN.</p>
+                    </div>
+                </a>
+                <a href="#dealer" class="reveal block group rounded-2xl overflow-hidden relative shadow-lg h-72 md:h-80" style="transition-delay:300ms">
+                    <img src="https://placehold.co/400x600/1a1a1a/00A651?text=Instalasi" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Instalasi">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#00A651] via-[#00A651]/50 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10 w-full">
+                        <h3 class="font-black text-white text-lg uppercase mb-1">Lokasi Instalasi</h3>
+                        <p class="text-white/80 text-xs font-medium leading-relaxed">Temukan alamat bengkel instalasi dan dukungan terdekat Anda.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer id="dealer" class="w-full">
+        <div class="bg-white py-10 flex justify-center border-t border-gray-100">
+            <a href="#" class="flex flex-col items-center group">
+                <div class="flex items-center gap-3">
+                    <svg class="h-14 md:h-16 text-[#00A651] group-hover:scale-105 transition-transform" viewBox="0 0 60 60" fill="none">
+                        <rect x="6" y="8" width="48" height="10" rx="2" fill="currentColor"/>
+                        <rect x="25" y="18" width="10" height="34" rx="2" fill="currentColor"/>
+                    </svg>
+                    <div class="font-black text-5xl md:text-6xl tracking-widest text-[#0D0F0D] leading-none">TEIN<span class="text-lg align-top font-bold">&reg;</span></div>
+                </div>
+                <div class="text-[9px] md:text-[11px] text-[#0D0F0D] font-bold tracking-widest uppercase mt-2">Suspensi No.1 Jepang</div>
+            </a>
+        </div>
+        <div class="bg-[#27a844] py-14 border-t-2 border-white/20">
+            <div class="container mx-auto px-6 lg:max-w-7xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+                    <div class="text-white lg:pr-8 lg:border-r border-white/30">
+                        <h4 class="font-bold text-[15px] uppercase mb-5 tracking-wide">PT. TEIN INDONESIA</h4>
+                        <ul class="space-y-4 text-sm font-medium leading-relaxed">
+                            <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>Alamat: Jl. Raya Otomotif No. 46, Kawasan Industri, Jakarta</li>
+                            <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>Kantor: Gedung Sentra Bisnis Lt. 18, Jakarta Selatan</li>
+                            <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>Pameran: Jl. Jenderal Sudirman No. 119</li>
+                        </ul>
+                    </div>
+                    <div class="text-white lg:pl-4">
+                        <h4 class="font-bold text-[15px] uppercase mb-5 tracking-wide">PRODUK KAMI</h4>
+                        <ul class="space-y-3 text-sm font-medium">
+                            <li><a href="#produk" class="hover:underline">Suspensi TEIN Basic</a></li>
+                            <li><a href="#produk" class="hover:underline">Suspensi TEIN Damper Gravel 4x4</a></li>
+                            <li><a href="#produk" class="hover:underline">Suspensi TEIN Damper Sport</a></li>
+                            <li><a href="#produk" class="hover:underline">Suspensi TEIN EnduraPro</a></li>
+                            <li><a href="#produk" class="hover:underline">Suspensi TEIN EnduraPro Plus</a></li>
+                            <li><a href="#produk" class="hover:underline">Suspensi TEIN Street Advance Z4</a></li>
+                        </ul>
+                    </div>
+                    <div class="text-white">
+                        <h4 class="font-bold text-[15px] uppercase mb-5 tracking-wide">KEBIJAKAN</h4>
+                        <ul class="space-y-3 text-sm font-medium">
+                            <li><a href="#" class="hover:underline">Kebijakan Instalasi &amp; Garansi</a></li>
+                            <li><a href="#" class="hover:underline">Kebijakan Pengiriman</a></li>
+                            <li><a href="#" class="hover:underline">Kebijakan Perlindungan Privasi</a></li>
+                            <li><a href="#" class="hover:underline">Kebijakan Pembayaran</a></li>
+                            <li><a href="#" class="hover:underline">Kebijakan Anti Pemalsuan</a></li>
+                        </ul>
+                    </div>
+                    <div class="text-white">
+                        <h4 class="font-bold text-[15px] uppercase mb-5 tracking-wide">HUBUNGI KAMI</h4>
+                        <ul class="space-y-3 text-sm font-medium">
+                            <li>Email: <a href="mailto:info@tein.id" class="hover:underline">info@tein.id</a></li>
+                            <li>WhatsApp: <a href="https://wa.me/6285219463121" class="hover:underline">+62 852-1946-3121</a></li>
+                            <li>Website: <a href="#" class="hover:underline">www.tein.id</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-[#27a844] py-6 border-t border-white/20">
+            <div class="container mx-auto px-6 text-center">
+                <div class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-[10px] md:text-xs text-white/70 mb-4 font-medium">
+                    <a href="#" class="hover:text-white">Suspensi Avanza</a><span class="text-white/30">|</span>
+                    <a href="#" class="hover:text-white">Shockbreaker Pajero</a><span class="text-white/30">|</span>
+                    <a href="#" class="hover:text-white">Suspensi Innova Zenix</a><span class="text-white/30">|</span>
+                    <a href="#" class="hover:text-white">Shock Hyundai Palisade</a><span class="text-white/30">|</span>
+                    <a href="#" class="hover:text-white">Coilover Fortuner</a>
+                </div>
+                <div class="text-[11px] md:text-xs text-white font-bold tracking-wide">&copy; 2026 TEIN Indonesia. Seluruh hak cipta dilindungi.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ── FLOATING BUTTONS ── -->
+    <a href="#garansi" class="fixed left-4 bottom-6 z-50 bg-white border border-[#00A651] text-[#00A651] hover:bg-[#00A651] hover:text-white flex items-center gap-2 px-3 py-2 rounded-full shadow-lg transition-all duration-300 group hover:-translate-y-1">
+        <svg class="w-4 h-4 md:w-5 md:h-5 text-[#00A651] group-hover:text-white transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/>
+        </svg>
+        <span class="font-black text-[10px] md:text-xs uppercase tracking-wide pr-1">Daftar / Cek Garansi</span>
+    </a>
+
+    <div class="fixed right-4 bottom-[80px] z-50 flex flex-col gap-3 items-center">
+        <a href="https://wa.me/6285219463121" target="_blank" rel="noopener" title="WhatsApp" class="w-12 h-12 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/tein_inc/" target="_blank" rel="noopener" title="Instagram" class="w-12 h-12 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" style="background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/TEINsuspensionofficial" target="_blank" rel="noopener" title="Facebook" class="w-12 h-12 bg-[#1877F2] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+        </a>
+    </div>
+
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Kembali ke atas">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </button>
+
+    <script>
+        // ── HEADER: transisi hitam ke putih saat scroll ──
+        const headerWrapper = document.getElementById('header-wrapper');
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const y = window.scrollY;
+                    const threshold = 80;
+
+                    if (y <= threshold) {
+                        // Di atas: hitam, tampil normal
+                        headerWrapper.classList.remove('scrolled');
+                    } else {
+                        // Scroll ke bawah: ubah jadi putih dan tetap tampil
+                        headerWrapper.classList.add('scrolled');
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // ── MOBILE MENU ──
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen   = document.getElementById('icon-open');
+        const iconClose  = document.getElementById('icon-close');
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', isOpen);
+            iconOpen.classList.toggle('hidden', !isOpen);
+            iconClose.classList.toggle('hidden', isOpen);
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            });
+        });
+
+        // ── SCROLL REVEAL ──
+        function reveal() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        // ── BACK TO TOP ──
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+
+        // ── HERO SLIDER ──
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots   = document.querySelectorAll('.dot');
+        let slideInterval;
+
+        function updateSlider(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => { d.classList.remove('bg-white'); d.classList.add('bg-white/40'); });
+            slides[index].classList.add('active');
+            if (dots[index]) { dots[index].classList.remove('bg-white/40'); dots[index].classList.add('bg-white'); }
+        }
+        function changeSlide(step) {
+            currentSlide = (currentSlide + step + slides.length) % slides.length;
+            updateSlider(currentSlide);
+            resetInterval();
+        }
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider(currentSlide);
+            resetInterval();
+        }
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(() => changeSlide(1), 6000);
+        }
+        if (slides.length > 1) resetInterval();
+
+        // ── DROPDOWN MODEL DINAMIS ──
+        const modelsByBrand = {
+            honda:      ['Brio','Jazz','City','Civic','CR-V','HR-V','BR-V','Accord','WR-V'],
+            toyota:     ['Avanza','Veloz','Rush','Raize','Calya','Innova Zenix','Fortuner','Corolla Cross','Yaris','Camry'],
+            mitsubishi: ['Xpander','Pajero Sport','Outlander','Eclipse Cross','L200 Triton'],
+            suzuki:     ['Ertiga','XL7','Baleno','Swift','Ignis','Jimny'],
+            daihatsu:   ['Sigra','Ayla','Rocky','Terios','Gran Max'],
+            nissan:     ['Magnite','Terra','Navara','Livina'],
+            mazda:      ['Mazda2','Mazda3','CX-3','CX-5','CX-8','CX-30'],
+            hyundai:    ['Creta','Tucson','Santa Fe','Ioniq 5','Stargazer','Palisade'],
+        };
+        const selectMerk  = document.getElementById('select-merk');
+        const selectModel = document.getElementById('select-model');
+        selectMerk.addEventListener('change', function() {
+            const models = modelsByBrand[this.value] || [];
+            selectModel.innerHTML = '<option value="" class="text-gray-800">Pilih Model...</option>';
+            models.forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = m.toLowerCase().replace(/\s+/g, '-');
+                opt.className = 'text-gray-800';
+                opt.textContent = m;
+                selectModel.appendChild(opt);
+            });
+        });
+    </script>
+</body>
+</html>
